@@ -8,6 +8,11 @@ public class Fibonacci {
     private static final int HIGHEST_FIBONACCI_INDEX = 70;
     private static final long HIGHEST_FIBONACCI_NUMBER = fibonacci(HIGHEST_FIBONACCI_INDEX);
 
+    /**
+     * Finds the nth Fibonacci number where f(0) = 0, f(1) = 1, f(2) = 1, f(3) = 2, ...
+     * @param n The Fibonacci number to find
+     * @return The requested number in the Fibonacci sequence
+     */
     public static long fibonacci(int n) {
         if (n < 0) {
             throw new IllegalArgumentException("n must be a positive number or zero");
@@ -19,6 +24,11 @@ public class Fibonacci {
         return Math.round((Math.pow(PHI, n) - Math.pow(1 - PHI, n)) / Math.sqrt(5));
     }
 
+    /**
+     * Finds the closest Fibonacci number to the given number
+     * @param fn The number to use when finding the closest number in the Fibonacci sequence
+     * @return The index of the closest Fibonacci number
+     */
     public static int indexOfNearestFibonacciNumber(long fn) {
         if (fn < 0) {
             throw new IllegalArgumentException("Can't find the index for a negative Fibonacci number");
