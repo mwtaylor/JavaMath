@@ -1,5 +1,7 @@
 package com.github.mwtaylor.javamath;
 
+import java.util.Arrays;
+
 public class CommonCalculations {
     private CommonCalculations() {}
 
@@ -35,5 +37,48 @@ public class CommonCalculations {
         }
 
         return greatestCommonDivisor(n2, n1 % n2);
+    }
+
+    /**
+     * Finds all prime factors of a number
+     * @param n The number to find prime factors of
+     * @return The list of prime factors, in order from smallest to largest
+     */
+    public static long[] primeFactors(long n) {
+        if (n < 1) {
+            throw new IllegalArgumentException("Can only find prime factors for non-zero positive number");
+        }
+
+        long[] factors = new long[64];
+        int factorCount = 0;
+
+        long remaining = n;
+
+        while (remaining % 2 == 0) {
+            factors[factorCount] = 2;
+            factorCount += 1;
+
+            remaining = remaining / 2;
+        }
+
+        long lastCheck = Math.round(Math.sqrt(remaining));
+
+        for (long i = 3; i <= lastCheck; i += 2) {
+            while (remaining % i == 0) {
+                factors[factorCount] = i;
+                factorCount += 1;
+
+                remaining = remaining / i;
+
+                lastCheck = Math.round(Math.sqrt(remaining));
+            }
+        }
+
+        if (remaining != 1) {
+            factors[factorCount] = remaining;
+            factorCount += 1;
+        }
+
+        return Arrays.copyOf(factors, factorCount);
     }
 }
